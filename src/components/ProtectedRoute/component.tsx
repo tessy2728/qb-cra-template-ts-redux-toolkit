@@ -12,7 +12,6 @@ const ProtectedRoute = ({
     redirectPath = '/',
     children,
 }:IProtectedRoute) => {
-    console.log(document.cookie)
     if (!isSignedIn()) {
         removeUserSession();
         return <Navigate to={redirectPath} replace />;

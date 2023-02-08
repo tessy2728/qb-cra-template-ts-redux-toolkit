@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { onRequest, onRequestError } from './requestInterceptor';
 import { onResponse, onResponseError } from './responseInterceptor';
 
-const API = axios.create({
+const API: AxiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_ENDPOINT,
     timeout: 120000
 });

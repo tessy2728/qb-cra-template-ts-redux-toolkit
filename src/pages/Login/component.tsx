@@ -10,7 +10,7 @@ import Loader from '../../components/Loader';
 const LoginComponent: FC<any> = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isSignedIn, loading, loginError, userDetails } = useSelector((state: DefaultStore) => state.user);
+    const { isSignedIn, loading, loginError } = useSelector((state: DefaultStore) => state.user);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -34,11 +34,9 @@ const LoginComponent: FC<any> = (props) => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await dispatch<any>(signIn({ email, password }));
-        console.log(res)
         if(res.payload.status === 200) {
             setPassword('');
             navigate('/home/articles');
-
         }
     };
 

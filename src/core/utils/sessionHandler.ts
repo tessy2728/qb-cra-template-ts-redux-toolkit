@@ -14,10 +14,10 @@ export const getUserSession = () => {
 
 export const removeUserSession = () => {
     localStorage.removeItem(SESSION_NAME);
-    document.cookie = "cookiename= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    document.cookie = "AccessToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
 };
 
-export const getAccessToken = () => getCookie('AccessToken')
+export const getAccessToken = () => getCookie('AccessToken');
 
 export const getUserName = () => getUserSession().name;
 

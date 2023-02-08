@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice, ThunkDispatch } from '@reduxjs/toolkit';
-import { AsyncThunk, BaseThunkAPI } from '@reduxjs/toolkit/dist/createAsyncThunk';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getData } from '../core/api';
 import { ARTICLE, ARTICLES } from '../core/config/urlConfig';
 import { IArticle } from '../core/interfaces/article';
 import { DefaultStore } from '../store/interfaces/store';
 import { IThunkResponse } from '../store/interfaces/thunk';
+
 interface IArticles {
     articles: IArticle[],
     fetchStatus: string,
@@ -27,7 +27,7 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
             return false
         }
     },
-    // dispatchConditionRejection: true
+    dispatchConditionRejection: true
 }
 );
 
@@ -47,7 +47,7 @@ export const fetchArticleById = createAsyncThunk('articles/fetchArticleById', as
         return false
         }
     },
-    // dispatchConditionRejection: true
+    dispatchConditionRejection: true
 }
 );
 
@@ -67,7 +67,6 @@ const articleSlice = createSlice({
             state.fetchStatus = 'pending';
         },
         setArticles(state, action) {
-            // console.log(action.payload)
             state.articles = action.payload.result;
             state.fetchStatus = 'fulfilled'
         },
