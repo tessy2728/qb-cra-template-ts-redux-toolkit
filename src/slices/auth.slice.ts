@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { UserAuth } from '../core/interfaces/user';
-import { getAccessToken, getUserName, setUserSession, removeUserSession } from '../core/utils/sessionHandler';
-import { getData, postData } from '../core/api';
-import { showToaster } from './toaster.slice';
-import { Dispatch } from '@reduxjs/toolkit';
+import { postData } from '../core/api';
 import { LOGIN_ENDPOINT } from '../core/config/urlConfig';
-import { createFalse } from 'typescript';
+import { UserAuth } from '../core/interfaces/user';
+import { getAccessToken, getUserName, removeUserSession, setUserSession } from '../core/utils/sessionHandler';
+import { showToaster } from './toaster.slice';
 
 const accessToken = getAccessToken();
 
@@ -44,8 +42,6 @@ export const signIn = createAsyncThunk('user/signIn', async (postParams: ILoginM
     }
 });
 
-// export const logout = createAsyncThunk('user/logout', async () => await getData('/logout'));
-
 const session = createSlice({
     name: 'user',
     initialState,
@@ -68,11 +64,13 @@ const session = createSlice({
             return state;
         },
         logout(state) {
+            console.log('clearing')
             state.name = '';
             state.accessToken = '';
             state.isSignedIn = false;
             removeUserSession();
-            showToaster({ message: 'Signed out successfully!' });
+            console.log('going to show')
+            
         },
         updateLoginError(state, action) {
             state.loading = false;
@@ -83,7 +81,6 @@ const session = createSlice({
         builder.addCase(signIn.pending, session.caseReducers.startSession)
         builder.addCase(signIn.fulfilled, session.caseReducers.updateLoginSuccess)
         builder.addCase(signIn.rejected, session.caseReducers.updateLoginError)
-        // builder.addCase(logout.fulfilled, session.caseReducers.logout)
     }
 });
 

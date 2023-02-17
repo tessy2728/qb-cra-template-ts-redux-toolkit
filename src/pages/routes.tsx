@@ -31,7 +31,6 @@ const router = createBrowserRouter([
           path: 'articles/:articleId',
           element: <ArticleDetails />,
           loader: articleDetailLoader
-        
       }]
     }]
   },

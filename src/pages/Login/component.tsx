@@ -52,6 +52,7 @@ const LoginComponent: FC<any> = (props) => {
                         name="email"
                         value={email}
                         onChange={onChange}
+                        autoComplete="email"
                     />
                     <input
                         type="password"
@@ -59,6 +60,7 @@ const LoginComponent: FC<any> = (props) => {
                         name="password"
                         value={password}
                         onChange={onChange}
+                        autoComplete="current-password"
                     />
                     <button type="submit" disabled={!email || !password}>
                         Sign in

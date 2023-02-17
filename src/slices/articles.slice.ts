@@ -16,14 +16,13 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
     } catch (err: any) {
         return thunkAPI.rejectWithValue(err.data)
     }
-}
-, {
+}, {
     condition: (params, thunkAPI) => {
-        const {articles} = thunkAPI.getState() as DefaultStore;
+        const { articles } = thunkAPI.getState() as DefaultStore;
         const fetchStatus = articles?.fetchStatus;
         // console.log(articles)
         if (fetchStatus === 'fulfilled' || fetchStatus === 'pending') {
-        // Already fetched or in progress, don't need to re-fetch
+            // Already fetched or in progress, don't need to re-fetch
             return false
         }
     },
@@ -31,30 +30,30 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
 }
 );
 
-export const fetchArticleById = createAsyncThunk('articles/fetchArticleById', async (articleId:string, thunkAPI) => {
+export const fetchArticleById = createAsyncThunk('articles/fetchArticleById', async (articleId: string, thunkAPI) => {
     try {
         return await getData(`${ARTICLE}/${articleId}`);
     } catch (err: any) {
         return thunkAPI.rejectWithValue(err.data)
     }
 }
-, {
-    condition: (articleId, thunkAPI) => {
-        const {articles} = thunkAPI.getState() as DefaultStore;
-        const fetchStatus = articles?.articleDetails[articleId]?.status;
-        if (fetchStatus === 'fulfilled' || fetchStatus === 'pending') {
-        // Already fetched or in progress, don't need to re-fetch
-        return false
-        }
-    },
-    dispatchConditionRejection: true
-}
+    , {
+        condition: (articleId, thunkAPI) => {
+            const { articles } = thunkAPI.getState() as DefaultStore;
+            const fetchStatus = articles?.articleDetails[articleId]?.status;
+            if (fetchStatus === 'fulfilled' || fetchStatus === 'pending') {
+                // Already fetched or in progress, don't need to re-fetch
+                return false
+            }
+        },
+        dispatchConditionRejection: true
+    }
 );
 
 
 const initialState: IArticles = {
     articles: [],
-    fetchStatus:'',
+    fetchStatus: '',
     articleDetails: {}
 
 };
@@ -63,27 +62,27 @@ const articleSlice = createSlice({
     name: 'articles',
     initialState,
     reducers: {
-        startFetching(state, action){
+        startFetching(state, action) {
             state.fetchStatus = 'pending';
         },
         setArticles(state, action) {
             state.articles = action.payload.result;
             state.fetchStatus = 'fulfilled'
         },
-        endFetching(state, action){
+        endFetching(state, action) {
             state.fetchStatus = '';
         },
-        startArticleFetching(state,action) {
-            const {meta} = action as IThunkResponse;
-            state.articleDetails[meta.arg] = {status:'pending'};
+        startArticleFetching(state, action) {
+            const { meta } = action as IThunkResponse;
+            state.articleDetails[meta.arg] = { status: 'pending' };
         },
-        setArticleDetails(state,action) {
-            const {meta} = action as IThunkResponse;
+        setArticleDetails(state, action) {
+            const { meta } = action as IThunkResponse;
             state.articleDetails[meta.arg] = action.payload.result[0]
             state.articleDetails[meta.arg].status = 'fulfilled';
         },
-        endArticleFetching(state, action){
-            const {meta} = action as IThunkResponse;
+        endArticleFetching(state, action) {
+            const { meta } = action as IThunkResponse;
             state.articleDetails[meta.arg].status = '';
         },
     },

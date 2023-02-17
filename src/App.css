@@ -251,3 +251,22 @@ body {
   display: inline-block;
   top: 50%;
 }
+
+.text-green-dark {
+  color: "#59BA47";
+}
+.bg-green-200 {
+  background-color: "#DEF7EC";
+}
+.bg-red-100 {
+
+}
+.text-red {
+
+}
+.bg-primary-100 {
+
+}
+.text-primary-700 {
+
+}

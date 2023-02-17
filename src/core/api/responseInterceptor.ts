@@ -12,6 +12,8 @@ enum HTTP_STATUS {
 export function onResponseError(error: AxiosError): Promise<AxiosError> {
     if (error.response?.status === HTTP_STATUS.SERVER_ERROR) {
         return Promise.reject(error.response.data);
+    } else if (error.response?.status === HTTP_STATUS.UNAUTHORIZED) {
+        return Promise.reject(error.response.data);
     }
     return Promise.reject(error.response);
 }

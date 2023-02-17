@@ -1,4 +1,4 @@
-import React,{ FC } from "react";
+import React, { FC } from "react";
 import { Link, useRouteError } from "react-router-dom";
 
 export const ErrorPage: FC = () => {
