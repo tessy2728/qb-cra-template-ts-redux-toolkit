@@ -64,13 +64,10 @@ const session = createSlice({
             return state;
         },
         logout(state) {
-            console.log('clearing')
             state.name = '';
             state.accessToken = '';
             state.isSignedIn = false;
             removeUserSession();
-            console.log('going to show')
-            
         },
         updateLoginError(state, action) {
             state.loading = false;
