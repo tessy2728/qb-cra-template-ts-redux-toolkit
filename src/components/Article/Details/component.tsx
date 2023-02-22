@@ -4,6 +4,7 @@ import { useLoaderData, useParams } from 'react-router-dom';
 import { IArticle } from '../../../core/interfaces/article';
 import { DefaultStore } from '../../../store/interfaces/store';
 import { IThunkResponse } from '../../../store/interfaces/thunk';
+import { ArticleHeader, ArticleImage, Divider, ArticleBody } from '../style';
 
 const ArticleDetails = () => {
   const { articleId } = useParams();
@@ -15,18 +16,18 @@ const ArticleDetails = () => {
     article = data.payload.result[0];
 
   return <div className="flex flex-column">
-    <header className="card__item card__header">
+    <ArticleHeader className="card__item">
       <h6 className="card__item card__item--small card__label">Featured</h6>
       <h2 className="card__item card__item--small card__title">{article.title}</h2>
-    </header>
-    <figure className="card__feature">
+    </ArticleHeader>
+    <ArticleImage>
       <img src={article.picture} alt="waves" />
-    </figure>
-    <hr className="card__item card__divider" />
+    </ArticleImage>
+    <Divider className="card__item" />
 
-    <section className="card__item card__body">
+    <ArticleBody className="card__item card__body">
       <p>{article.body}</p>
-    </section>
+    </ArticleBody>
   </div>;
 };
 

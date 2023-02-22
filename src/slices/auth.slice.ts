@@ -4,7 +4,6 @@ import { postData } from '../core/api';
 import { LOGIN_ENDPOINT } from '../core/config/urlConfig';
 import { UserAuth } from '../core/interfaces/user';
 import { getAccessToken, getUserName, removeUserSession, setUserSession } from '../core/utils/sessionHandler';
-import { showToaster } from './toaster.slice';
 
 const accessToken = getAccessToken();
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ArticleCard from '../../ArticleCard/component'
+import ArticleCard from '../Card/component'
 import { useLoaderData } from 'react-router-dom';
 import { IArticle } from '../../../core/interfaces/article';
 import { getUserId } from '../../../core/utils/sessionHandler';

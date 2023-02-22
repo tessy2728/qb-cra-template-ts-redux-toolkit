@@ -1,6 +1,7 @@
 import React from "react";
+import { DottedCircleLoader } from "./style";
 
 const Spinner = () => {
-    return <div className="loader"/>
+    return <DottedCircleLoader />
 }
 export default Spinner;

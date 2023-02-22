@@ -20,7 +20,6 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
     condition: (params, thunkAPI) => {
         const { articles } = thunkAPI.getState() as DefaultStore;
         const fetchStatus = articles?.fetchStatus;
-        // console.log(articles)
         if (fetchStatus === 'fulfilled' || fetchStatus === 'pending') {
             // Already fetched or in progress, don't need to re-fetch
             return false
