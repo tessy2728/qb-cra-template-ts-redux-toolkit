@@ -7,7 +7,6 @@ const Wrapper = styled.section`
     justify-content: center;
     height: 100%;
     flex-direction: column;
-    background: #f6f6f6;
     min-height: 100vh;
 
     section {

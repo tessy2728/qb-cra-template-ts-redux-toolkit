@@ -1,14 +1,14 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
-import Login from './Login';
-import ArticleList from "../components/Article/List";
-import ArticleDetails from '../components/Article/Details';
+import Login from './Auth/Login';
 import Home, { articlesLoader, articleDetailLoader } from './Home';
-import {isLoggedIn} from '../core/utils/sessionHandler'
+import { isLoggedIn } from './Auth/helper'
 import ProtectedRoute from '../components/ProtectedRoute/component';
 import AppLayout from '../layouts/component';
 import { ErrorPage } from './Error/component';
+import ArticleDetails from './Home/Article/Details';
+import ArticleList from './Home/Article/List';
 
 const router = createBrowserRouter([
   {
@@ -28,13 +28,13 @@ const router = createBrowserRouter([
         loader: articlesLoader,
         element: <ArticleList />,
       }, {
-          path: 'articles/:articleId',
-          element: <ArticleDetails />,
-          loader: articleDetailLoader
+        path: 'articles/:articleId',
+        element: <ArticleDetails />,
+        loader: articleDetailLoader
       }]
     }]
   },
-  
+
 
 ]);
 

@@ -1,5 +1,5 @@
 import { AxiosError, AxiosRequestConfig, AxiosRequestHeaders, InternalAxiosRequestConfig } from 'axios';
-import { getAccessToken } from '../utils/sessionHandler';
+import { getAccessToken } from '../../pages/Auth/helper';
 
 export const onRequest = (config: AxiosRequestConfig) => {
     const token = getAccessToken();

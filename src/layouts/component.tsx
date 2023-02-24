@@ -4,12 +4,12 @@ import Header from '../components/Header';
 import { useSelector } from 'react-redux';
 import Alert from '../components/Alert';
 import { isObject } from '../core/utils/utils';
-import { DefaultStore } from '../store/interfaces/store';
+import { RootState } from '../store/interfaces/store';
 import { hideToaster } from '../slices/toaster.slice';
 import { useDispatch } from 'react-redux';
 
 function AppLayout() {
-    const alertConfig = useSelector((state: DefaultStore) => state.toaster);
+    const alertConfig = useSelector((state: RootState) => state.toaster);
     const dispatch = useDispatch();
     return (
         <div className="App">

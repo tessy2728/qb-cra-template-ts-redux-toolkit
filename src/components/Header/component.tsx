@@ -1,10 +1,11 @@
 import React from 'react';
 import logo from '../../logo.svg';
-import { isLoggedIn } from '../../core/utils/sessionHandler'
-import { logout } from '../../slices/auth.slice';
+import { isLoggedIn } from '../../pages/Auth/helper'
+import { logout } from '../../pages/Auth/slice';
 import { showToaster } from '../../slices/toaster.slice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { ThemeSwitch } from './ThemeSwitch';
 
 function Header() {
     const dispatch = useDispatch();
@@ -22,10 +23,12 @@ function Header() {
                 React Boilerplate
             </p>
         </div>
-
-        {isLoggedIn() && <a className="App-link" onClick={logoutSession}>
-            Logout
-        </a>}
+        <div className='flex align-center'>
+            <ThemeSwitch />
+            {isLoggedIn() && <a className="App-link" onClick={logoutSession}>
+                Logout
+            </a>}
+        </div>
     </header>;
 }
 

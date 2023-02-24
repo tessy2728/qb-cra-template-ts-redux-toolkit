@@ -1,16 +1,15 @@
 import React, { useEffect, useState, FC, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import { signIn } from '../../slices/auth.slice';
-import { DefaultStore } from '../../store/interfaces/store';
+import Loader from '../../../components/Loader';
+import { signIn } from '../slice';
+import { selectAuthDomain } from '../slice/selectors';
 import Wrapper from './style';
-import Loader from '../../components/Loader';
 
 const LoginComponent: FC<any> = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isSignedIn, loading, loginError } = useSelector((state: DefaultStore) => state.user);
+    const { isSignedIn, loading, loginError } = useSelector(selectAuthDomain);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -34,7 +33,7 @@ const LoginComponent: FC<any> = (props) => {
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await dispatch<any>(signIn({ email, password }));
-        if(res.payload.status === 200) {
+        if (res.payload.status === 200) {
             setPassword('');
             navigate('/home/articles');
         }

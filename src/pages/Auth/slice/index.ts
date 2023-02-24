@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { postData } from '../core/api';
-import { LOGIN_ENDPOINT } from '../core/config/urlConfig';
-import { UserAuth } from '../core/interfaces/user';
-import { getAccessToken, getUserName, removeUserSession, setUserSession } from '../core/utils/sessionHandler';
+import { postData } from '../../../core/api';
+import { LOGIN_ENDPOINT } from '../../../core/config/urlConfig';
+import { getAccessToken, getUserName, removeUserSession, setUserSession } from '../helper';
+import { AuthState, ILoginModal } from '../interfaces';
 
 const accessToken = getAccessToken();
 
-const initialState: UserAuth = {
+export const initialState: AuthState = {
     name: getUserName() || '',
     userDetails: {},
     accessToken: accessToken || '',
@@ -15,11 +15,6 @@ const initialState: UserAuth = {
     loading: false,
     loginError: ''
 };
-
-interface ILoginModal {
-    email: string,
-    password: string
-}
 
 const getErrorMessage = (payload: any) => {
     if (!payload.statusCode)
@@ -42,7 +37,7 @@ export const signIn = createAsyncThunk('user/signIn', async (postParams: ILoginM
 });
 
 const session = createSlice({
-    name: 'user',
+    name: 'auth',
     initialState,
     reducers: {
         startSession(state) {

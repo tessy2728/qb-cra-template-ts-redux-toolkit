@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useLoaderData, useParams } from 'react-router-dom';
-import { IArticle } from '../../../core/interfaces/article';
-import { DefaultStore } from '../../../store/interfaces/store';
-import { IThunkResponse } from '../../../store/interfaces/thunk';
-import { ArticleHeader, ArticleImage, Divider, ArticleBody } from '../style';
+import { IThunkResponse } from '../../../../store/interfaces/thunk';
+import { IArticle } from '../interfaces';
+import { selectArticleDetails } from '../slice/selectors';
+import { ArticleBody, ArticleHeader, ArticleImage, Divider } from '../styled';
 
 const ArticleDetails = () => {
   const { articleId } = useParams();
   const data = useLoaderData() as IThunkResponse;
   let article: IArticle;
   if (data.error && data.error.name === "ConditionError") {
-    article = useSelector((state: DefaultStore) => state.articles.articleDetails[articleId as string]);
+    article = useSelector(selectArticleDetails)[articleId as string];
   } else
     article = data.payload.result[0];
 

@@ -1,6 +1,6 @@
-export interface LoginPayload {
-    username: string;
-    password: string;
+export interface ILoginModal {
+    email: string,
+    password: string
 }
 
 export interface User {
@@ -17,7 +17,7 @@ export interface User {
     updatedAt?: Date;
 }
 
-export interface UserAuth {
+export interface AuthState {
     name: string;
     accessToken: string;
     isSignedIn?: boolean;

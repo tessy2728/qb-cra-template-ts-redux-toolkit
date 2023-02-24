@@ -1,8 +1,8 @@
-import { UserAuth } from '../interfaces/user';
-import { getCookie } from './cookie';
+import { getCookie } from '../../core/utils/cookie';
+import { AuthState } from './interfaces';
 const SESSION_NAME = 'qb-react-ts-boilerplate.session'; //Replace app with ProjectName
 
-export const setUserSession = (data: UserAuth) => {
+export const setUserSession = (data: AuthState) => {
     localStorage.setItem(SESSION_NAME, JSON.stringify(data));
     document.cookie = "AccessToken=" + data.accessToken;
 };

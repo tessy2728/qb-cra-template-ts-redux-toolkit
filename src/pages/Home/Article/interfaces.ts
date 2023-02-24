@@ -7,3 +7,9 @@ export interface IArticle {
     updated_at: Date,
     user_id: string
 }
+
+export interface IArticleState {
+    articles: IArticle[],
+    fetchStatus: string,
+    articleDetails: any
+}

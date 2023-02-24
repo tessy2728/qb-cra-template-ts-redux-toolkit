@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IArticle } from '../../../core/interfaces/article';
-import { Article, ArticleImage, ArticleHeader, Divider, ArticleBody } from '../style';
+import { IArticle } from '../interfaces';
+import { Article, ArticleImage, ArticleHeader, Divider, ArticleBody } from '../styled';
 
 const ArticleCard = (props: { article: IArticle, key: number }) => {
   const { article } = props;

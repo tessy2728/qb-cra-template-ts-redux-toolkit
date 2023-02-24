@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import ArticleCard from '../Card/component'
+import ArticleCard from '../Card'
 import { useLoaderData } from 'react-router-dom';
-import { IArticle } from '../../../core/interfaces/article';
-import { getUserId } from '../../../core/utils/sessionHandler';
 import { useSelector } from 'react-redux';
-import { DefaultStore } from '../../../store/interfaces/store';
-import { IThunkResponse } from '../../../store/interfaces/thunk';
+import { getUserId } from '../../../Auth/helper';
+import { IThunkResponse } from '../../../../store/interfaces/thunk';
+import { IArticle } from '../interfaces';
+import { selectArticles } from '../slice/selectors';
 
 const ArticleList = () => {
     const data = (useLoaderData() as IThunkResponse);
     let articles: IArticle[];
     if (data.error && data.error.name === "ConditionError") {
-        articles = useSelector((state: DefaultStore) => state.articles.articles);
+        articles = useSelector(selectArticles);
     } else
         articles = data.payload.result;
 

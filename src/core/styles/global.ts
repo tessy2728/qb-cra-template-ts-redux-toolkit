@@ -9,7 +9,8 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100%;
-    background-color: #e9ebea;
+    color: ${p => p.theme.text};
+    background-color: ${p => p.theme.background};
     text-align: center;
   }
   .text-left {
@@ -76,6 +77,9 @@ const GlobalStyle = createGlobalStyle`
   
   .flex-column {
     flex-direction: column;
+  }
+  .align-center {
+    align-items:center;
   }
 `;
 

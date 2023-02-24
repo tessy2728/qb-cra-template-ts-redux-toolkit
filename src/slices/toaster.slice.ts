@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import store from '../store';
 
-const initialState = {
+export interface ToasterState {
+    message: string,
+    show: boolean,
+    autoHideDuration?: number | undefined,
+    type: string
+}
+
+const initialState: ToasterState = {
     message: '',
     show: false,
-    autoHideDuration: null,
     type: ''
 };
 
@@ -22,7 +27,7 @@ const toaster = createSlice({
             state.message = '';
             state.type = '';
             state.show = false;
-            state.autoHideDuration = null;
+            state.autoHideDuration = undefined;
         },
     },
 });

@@ -1,15 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getData } from '../core/api';
-import { ARTICLE, ARTICLES } from '../core/config/urlConfig';
-import { IArticle } from '../core/interfaces/article';
-import { DefaultStore } from '../store/interfaces/store';
-import { IThunkResponse } from '../store/interfaces/thunk';
+import { getData } from '../../../../core/api';
+import { ARTICLE, ARTICLES } from '../../../../core/config/urlConfig';
+import { RootState } from '../../../../store/interfaces/store';
+import { IThunkResponse } from '../../../../store/interfaces/thunk';
+import { IArticleState } from '../interfaces';
 
-interface IArticles {
-    articles: IArticle[],
-    fetchStatus: string,
-    articleDetails: any
-}
+
 export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (params, thunkAPI) => {
     try {
         return await getData(ARTICLES);
@@ -18,7 +14,7 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (p
     }
 }, {
     condition: (params, thunkAPI) => {
-        const { articles } = thunkAPI.getState() as DefaultStore;
+        const { articles } = thunkAPI.getState() as RootState;
         const fetchStatus = articles?.fetchStatus;
         if (fetchStatus === 'fulfilled' || fetchStatus === 'pending') {
             // Already fetched or in progress, don't need to re-fetch
@@ -38,7 +34,7 @@ export const fetchArticleById = createAsyncThunk('articles/fetchArticleById', as
 }
     , {
         condition: (articleId, thunkAPI) => {
-            const { articles } = thunkAPI.getState() as DefaultStore;
+            const { articles } = thunkAPI.getState() as RootState;
             const fetchStatus = articles?.articleDetails[articleId]?.status;
             if (fetchStatus === 'fulfilled' || fetchStatus === 'pending') {
                 // Already fetched or in progress, don't need to re-fetch
@@ -50,7 +46,7 @@ export const fetchArticleById = createAsyncThunk('articles/fetchArticleById', as
 );
 
 
-const initialState: IArticles = {
+export const initialState: IArticleState = {
     articles: [],
     fetchStatus: '',
     articleDetails: {}

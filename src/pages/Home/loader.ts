@@ -1,10 +1,6 @@
-import { fetchArticleById, fetchArticles } from '../../slices/articles.slice';
+import { fetchArticleById, fetchArticles } from './Article/slice';
 import store from "../../store";
-import { DefaultStore } from "../../store/interfaces/store";
 import { IThunkResponse } from "../../store/interfaces/thunk";
-import {
-  defer
-} from "react-router-dom";
 
 export const articlesLoader = async () => {
   return await store.dispatch(fetchArticles()) as unknown as IThunkResponse;

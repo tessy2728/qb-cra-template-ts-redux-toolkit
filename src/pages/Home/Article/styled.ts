@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as colors from '../../core/config/colors';
+import * as colors from '../../../core/config/colors';
 
 export const Article = styled.article`
     width: 275px;

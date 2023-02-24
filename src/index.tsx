@@ -6,17 +6,20 @@ import store from './store';
 import AuthProvider from './contexts/auth';
 import { RouterProvider } from 'react-router-dom';
 import router from './pages/routes';
-import Style from './style';
+import Style from './core/styles/global';
+import { AppThemeProvider } from './core/theme/provider';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <Provider store={store}>
-        <AuthProvider>
-            <React.StrictMode>
-                <Style.GlobalStyle />
-                <RouterProvider router={router} />
-            </React.StrictMode>
-        </AuthProvider>
+        <AppThemeProvider>
+            <AuthProvider>
+                <React.StrictMode>
+                    <Style.GlobalStyle />
+                    <RouterProvider router={router} />
+                </React.StrictMode>
+            </AuthProvider>
+        </AppThemeProvider>
     </Provider>
 );
 
