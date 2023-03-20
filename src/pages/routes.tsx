@@ -1,10 +1,9 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, redirect } from 'react-router-dom';
 
 import Login from './Auth/Login';
 import Home, { articlesLoader, articleDetailLoader } from './Home';
-import { isLoggedIn } from './Auth/helper'
-import ProtectedRoute from '../components/ProtectedRoute/component';
+import { isLoggedIn } from './Auth/helper';
 import AppLayout from '../layouts/component';
 import { ErrorPage } from './Error/component';
 import ArticleDetails from './Home/Article/Details';
@@ -21,7 +20,14 @@ const router = createBrowserRouter([
     },
     {
       path: "home",
-      element: <ProtectedRoute isSignedIn={isLoggedIn} redirectPath="/"><Home /></ProtectedRoute>,
+      element: <Home />,
+      loader: async () => {
+        const isSignedIn = isLoggedIn();
+        if (!isSignedIn) {
+          return redirect("/");
+        }
+        return null;
+      },
       children: [{
         path: "articles",
         shouldRevalidate: () => false,
