@@ -9,17 +9,15 @@ import { selectArticles } from '../slice/selectors';
 
 const ArticleList = () => {
     const data = (useLoaderData() as IThunkResponse);
-    let articles: IArticle[];
-    if (data.error && data.error.name === "ConditionError") {
-        articles = useSelector(selectArticles);
-    } else
+    let articles: IArticle[] = useSelector(selectArticles);
+    if (!data.error && data.payload) {
         articles = data.payload.result;
-
+    }
     const userId = getUserId();
 
     return <div className="flex flex-column">
         <p className="text-left">Here are some articles for you:</p>
-        <div className="grid grid-cols-3">{articles.filter((article: IArticle) => article.user_id == userId).map((article: IArticle) => <ArticleCard key={article.id} article={article} />)}</div>
+        <div className="grid grid-cols-3">{articles.filter((article: IArticle) => article.user_id === userId).map((article: IArticle) => <ArticleCard key={article.id} article={article} />)}</div>
     </div>;
 };
 

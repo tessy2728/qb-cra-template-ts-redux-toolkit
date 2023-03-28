@@ -9,11 +9,10 @@ import { ArticleBody, ArticleHeader, ArticleImage, Divider } from '../styled';
 const ArticleDetails = () => {
   const { articleId } = useParams();
   const data = useLoaderData() as IThunkResponse;
-  let article: IArticle;
-  if (data.error && data.error.name === "ConditionError") {
-    article = useSelector(selectArticleDetails)[articleId as string];
-  } else
+  let article: IArticle = useSelector(selectArticleDetails)[articleId as string];
+  if (!data.error && data.payload) {
     article = data.payload.result[0];
+  }
 
   return <div className="flex flex-column">
     <ArticleHeader className="card__item">

@@ -23,4 +23,4 @@ export const getUserName = () => getUserSession().name;
 
 export const getUserId = () => getUserSession().userDetails?.id;
 
-export const isLoggedIn = () => !!document.cookie;
+export const isLoggedIn = () => !!getCookie('AccessToken');
